@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="aiAppender"
+              class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender">
+        <instrumentationKey>00000000-0000-0000-0000-000000000000</instrumentationKey>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="aiAppender" />
+    </root>
+
+    <logger name="org.springframework.web" level="INFO" />
+    <logger name="com.marcdenning.azure" level="INFO" />
+</configuration>

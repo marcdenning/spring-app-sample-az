@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'io.freefair.lombok' version '4.1.5'
+    id 'java'
+    id 'war'
+}
+
+group = 'com.marcdenning.azure'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('azureVersion', '2.2.1')
+    set('azureAppInsightsVersion', '2.5.0')
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "com.microsoft.azure:applicationinsights-spring-boot-starter:${azureAppInsightsVersion}"
+    implementation "com.microsoft.azure:applicationinsights-logging-logback:${azureAppInsightsVersion}"
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.microsoft.azure:azure-spring-boot-bom:${azureVersion}"
+    }
+}
+
+bootWar {
+    archiveFileName = 'ROOT.war'
+}
+
+test {
+    useJUnitPlatform()
+}

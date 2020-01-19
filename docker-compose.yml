@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      spring_profiles_active: local
+    ports:
+    - '8080:8080'
+    networks:
+    - app-network
+  tomcat:
+    build:
+      context: ./
+      dockerfile: ./tomcat/Dockerfile
+    environment:
+      spring_profiles_active: local
+    ports:
+    - '8080:8080'
+    networks:
+    - app-network
+  taurus:
+    image: blazemeter/taurus
+    networks:
+    - app-network
+    volumes:
+    - './:/bzt-configs'
+
+networks:
+  app-network:
+

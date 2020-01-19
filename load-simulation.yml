@@ -1,0 +1,14 @@
+execution:
+  - concurrency: 5
+    ramp-up: 10s
+    throughput: 20
+    hold-for: 5m
+    scenario: load
+
+scenarios:
+  load:
+    default-address: https://app.azurewebsites.net/
+    requests:
+      - /actuator/health
+      - /not-found
+      - /api/hello
