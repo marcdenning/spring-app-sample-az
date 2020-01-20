@@ -29,6 +29,7 @@ This makes it easy to drop the application into, say, Tomcat's `webapps` directo
 * Application Insights
   - Instrumentation key into [`src/main/resources/application.properties`](/src/main/resources/application.properties) and [`src/main/resources/logback.xml`](/src/main/resources/logback.xml)
   - Logs (analytics) - query language for looking at "events" - pay attention to `traces` (logs), `requests` (HTTP), `performanceCounters` (metrics)
+  - Metrics to investigate Micrometer-reported metrics, look under `azure.applicationinsights` namespace
 
 ## Simulate Application Load
 
