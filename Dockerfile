@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/java/jre:11u5-zulu-alpine
+FROM mcr.microsoft.com/java/jre:11u9-zulu-alpine
 VOLUME /tmp
 RUN addgroup -S app && adduser -S -H -D app -G app
 ADD --chown=app:app ./build/libs/ROOT.war /ROOT.war

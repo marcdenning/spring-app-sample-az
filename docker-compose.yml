@@ -21,6 +21,8 @@ services:
     - '8080:8080'
     networks:
     - app-network
+    volumes:
+      - 'bitnami:/bitnami'
   taurus:
     image: blazemeter/taurus
     networks:
@@ -31,3 +33,5 @@ services:
 networks:
   app-network:
 
+volumes:
+  bitnami:
