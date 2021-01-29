@@ -1,3 +1,6 @@
+trigger:
+  - '*'
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -16,7 +19,7 @@ jobs:
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           tasks: 'clean check assemble'
-#          codeCoverageToolOption: 'jaCoCo'
+          codeCoverageToolOption: 'jaCoCo'
           checkStyleRunAnalysis: false
       - task: PublishPipelineArtifact@1
         displayName: Publish App Archive
