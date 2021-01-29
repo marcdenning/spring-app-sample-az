@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/marcdenning/spring-app-sample/_apis/build/status/kenobi883.spring-app-sample-az?branchName=main)](https://dev.azure.com/marcdenning/spring-app-sample/_build/latest?definitionId=1&branchName=main)
+
 # Spring Boot App on Azure Sample
 
 > Simple Spring Boot web application with some Azure specific bindings.
