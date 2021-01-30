@@ -20,7 +20,7 @@ jobs:
           testResultsFiles: '**/TEST-*.xml'
           tasks: 'clean check assemble'
           codeCoverageToolOption: 'jaCoCo'
-          checkStyleRunAnalysis: false
+          checkStyleRunAnalysis: true
       - task: PublishPipelineArtifact@1
         displayName: Publish App Archive
         inputs:
