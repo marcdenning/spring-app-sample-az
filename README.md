@@ -28,9 +28,11 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
 * App Service for Windows
   - Tomcat 9
   - Java 11
-  - POST https://web-app-name.scm.azurewebsites.net/api/wardeploy
+  - ```
+    POST https://web-app-name.scm.azurewebsites.net/api/wardeploy
     Header: Authorization Basic-from-publish-profile
     Body: binary WAR file
+    ```
   - App Service Logs > Application Logging (file system) - time-bound, only some Spring logs in catalina.**.log
   - Log Stream is worthless
 * Application Insights
