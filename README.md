@@ -18,6 +18,11 @@ Build the application with Gradle:
 The WAR is automatically output at `build/libs/ROOT.war`.
 This makes it easy to drop the application into, say, Tomcat's `webapps` directory and have it function as the root servlet context.
 
+### Gitpod
+
+You may use [Gitpod](https://www.gitpod.io/) to quickly create a dev environment appropriate for this app.
+If you already have a Gitpod account, simply navigate to [https://gitpod.io#https://github.com/marcdenning/spring-app-sample-az](https://gitpod.io#https://github.com/marcdenning/spring-app-sample-az) to open a new workspace based on this repo.
+
 ## Azure
 
 * App Service for Windows
