@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/java/jre:11u9-zulu-alpine
+FROM eclipse-temurin:17.0.6_10-jre
 VOLUME /tmp
-RUN addgroup -S app && adduser -S -H -D app -G app
+RUN addgroup --system app && adduser --system --no-create-home --ingroup app --disabled-password app
 ADD --chown=app:app ./build/libs/ROOT.war /ROOT.war
 USER app
 RUN touch /ROOT.war
