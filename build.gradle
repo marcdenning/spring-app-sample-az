@@ -23,16 +23,13 @@ repositories {
 }
 
 ext {
-    set('azureVersion', '2.3.5')
+    set('azureSpringVersion', '4.6.0')
     set('azureAppInsightsVersion', '2.6.4')
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "com.microsoft.azure:applicationinsights-spring-boot-starter:${azureAppInsightsVersion}"
-    implementation "com.microsoft.azure:applicationinsights-logging-logback:${azureAppInsightsVersion}"
-    implementation 'com.microsoft.azure:azure-spring-boot-metrics-starter'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -45,7 +42,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom "com.microsoft.azure:azure-spring-boot-bom:${azureVersion}"
+        mavenBom "com.azure.spring:spring-cloud-azure-dependencies:${azureSpringVersion}"
     }
 }
 

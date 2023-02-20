@@ -26,8 +26,8 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
 ## Azure
 
 * App Service for Windows
-  - Tomcat 9
-  - Java 11
+  - Tomcat 10
+  - Java 17
   - ```
     POST https://web-app-name.scm.azurewebsites.net/api/wardeploy
     Header: Authorization Basic-from-publish-profile
@@ -35,8 +35,8 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
     ```
   - App Service Logs > Application Logging (file system) - time-bound, only some Spring logs in catalina.**.log
   - Log Stream is worthless
-* Application Insights
-  - Instrumentation key into [`src/main/resources/application.properties`](/src/main/resources/application.properties) and [`src/main/resources/logback.xml`](/src/main/resources/logback.xml)
+* Application Insights - use the [OpenTelemetry implementation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=java) to instrument the app with a Java agent.
+  This requires no code changes, and the instrumentation key can be set via an environment variable.
   - Logs (analytics) - query language for looking at "events" - pay attention to `traces` (logs), `requests` (HTTP), `performanceCounters` (metrics)
   - Metrics to investigate Micrometer-reported metrics, look under `azure.applicationinsights` namespace
 
