@@ -35,9 +35,10 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    implementation 'com.azure.spring:spring-cloud-azure-starter:4.6.0'
+    implementation 'com.azure.spring:spring-cloud-azure-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     providedRuntime 'com.microsoft.sqlserver:mssql-jdbc:12.2.0.jre11'
+    testRuntimeOnly 'com.h2database:h2'
 }
 
 dependencyManagement {
