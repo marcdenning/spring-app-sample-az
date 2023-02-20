@@ -96,6 +96,48 @@ spring:
 
 Of course, handle the account credentials appropriately.
 
+#### Authentication with Azure AD credentials
+
+A more centrally manageable method of authenticating to an Azure SQL database is with Azure Active Directory credentials.
+This method allows, among other benefits, the use of Managed Identities in Azure.
+For instance, if the app is deployed to App Service, the Managed Identity feature allows the app to have an identity automatically provisioned and made available to the application runtime.
+This helps protect credentials from being leaked.
+
+One potential pain point with using Managed Identities is the developer experience.
+Managed Identities are provided by the Azure runtime, but developers are often coding, compiling, and running their applications on local machines during the development lifecycle.
+
+One way of allowing developers to authenticate from their local environment while still leveraging Managed Identities during deployment, is making use of the Azure Default Credential chain.
+In version 12+ of the Microsoft SQL Server JDBC driver, the driver can authenticate based on a chain of identities including an Azure CLI token.
+A developer can install the Azure CLI, authenticate to a tenant via `az login`, and the database driver can detect that authentication token as a fallback.
+
+Before configuring the application, the developer's Azure Active Directory account must be given permissions to use the database.
+Check [the Microsoft documentation on assigning roles](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/migrate-sql-database-to-passwordless-connection?tabs=spring%2Capp-service%2Cassign-role-azure-cli#assign-roles-to-the-managed-identity) for up-to-date steps.
+At the time of writing, the following SQL commands should be executed on the target database where `$AZ_DATABASE_AD_MI_USERNAME` is the developer's Azure AD username.
+These commands also apply to the Managed Identity created by Azure services such as App Service.
+
+```sql
+CREATE USER "$AZ_DATABASE_AD_MI_USERNAME" FROM EXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER "$AZ_DATABASE_AD_MI_USERNAME";
+ALTER ROLE db_datawriter ADD MEMBER "$AZ_DATABASE_AD_MI_USERNAME";
+GO
+```
+
+Configuring the Spring Boot app requires using the dependency management feature of Maven or the Gradle plugin to pull in the `com.azure.spring:spring-cloud-azure-dependencies` artifact.
+Then, the application depends on the `com.azure.spring:spring-cloud-azure-starter` package, and of course the database driver: `com.microsoft.sqlserver:mssql-jdbc:12.2.0.jre11`.
+Check the [`build.gradle`](./build.gradle) file for how to declare these dependencies in Gradle.
+
+With the Azure Spring Cloud dependencies in the classpath, ensure that the Spring datasource URL includes `authentication=ActiveDirectoryDefault` for developer machines:
+
+```yaml
+spring:
+  datasource:
+    url: "jdbc:sqlserver://sqlservername.database.windows.net:1433;database=sqldbname;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;authentication=ActiveDirectoryDefault"
+```
+
+As long as the developer has a valid authentication token with the Azure CLI, they should be able to start the Spring Boot app and the Microsoft SQL Server driver will find that credential and authenticate to the database.
+
+Spring profiles or environment variables can be used to override the datasource URL once deployed and leverage the Managed Identity of the compute service.
+
 ## Simulate Application Load
 
 Use [Taurus](https://gettaurus.org/) to execute the [`load-simulation.yml`](/load-simulation.yml) HTTP traffic test.
