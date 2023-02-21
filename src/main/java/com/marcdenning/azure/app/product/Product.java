@@ -1,9 +1,16 @@
 package com.marcdenning.azure.app.product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
 
-import javax.persistence.*;
-
+/**
+ * JPA Entity model of the SalesLT.Product table in the Azure SQL sample data set.
+ */
 @Data
 @Entity
 @Table(schema = "SalesLT", name = "Product")

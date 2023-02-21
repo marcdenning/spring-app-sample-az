@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data transfer object for a Product.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +20,12 @@ public class ProductDto {
 
     private String color;
 
+    /**
+     * Builds a new ProductDto instance from a Product.
+     *
+     * @param product Product to map from
+     * @return populated ProductDto instance
+     */
     public static ProductDto fromProduct(final Product product) {
         return new ProductDto(
             product.getId(),

@@ -1,10 +1,12 @@
 package com.marcdenning.azure.app.product;
 
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+/**
+ * Spring Data JPA repository for Product entity.
+ */
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 

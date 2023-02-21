@@ -1,11 +1,13 @@
 package com.marcdenning.azure.app.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * ProductService implementation based on Spring Data JPA repository.
+ */
 @Service
 public class JpaProductService implements ProductService {
 
@@ -18,6 +20,8 @@ public class JpaProductService implements ProductService {
 
     @Override
     public List<ProductDto> getTopProducts() {
-        return productRepository.findFirst10ByOrderByNameAsc().stream().map(ProductDto::fromProduct).collect(Collectors.toList());
+        return productRepository.findFirst10ByOrderByNameAsc().stream()
+            .map(ProductDto::fromProduct)
+            .collect(Collectors.toList());
     }
 }
