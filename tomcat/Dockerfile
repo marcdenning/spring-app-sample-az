@@ -1,3 +1,3 @@
-FROM bitnami/tomcat:9.0.41
+FROM docker.io/bitnami/tomcat:10.1.10
 
-ADD ./build/libs/ROOT.war /opt/bitnami/tomcat/webapps_default/spring-app-sample.war
+ADD ./build/libs/ROOT.war /opt/bitnami/tomcat/webapps/spring-app-sample.war
