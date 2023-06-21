@@ -25,14 +25,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.azure.spring:spring-cloud-azure-starter'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    providedRuntime 'com.microsoft.sqlserver:mssql-jdbc:12.2.0.jre11'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    implementation 'com.azure.spring:spring-cloud-azure-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    providedRuntime 'com.microsoft.sqlserver:mssql-jdbc:12.2.0.jre11'
     testRuntimeOnly 'com.h2database:h2'
 }
 
