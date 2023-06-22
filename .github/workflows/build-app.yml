@@ -1,0 +1,20 @@
+name: build-app
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+      - run: ./gradlew clean check assemble
+      - run: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: build/reports
+      - run: actions/upload-artifact@v3
+        with:
+          name: app-war-file
+          path: build/libs/ROOT.war
