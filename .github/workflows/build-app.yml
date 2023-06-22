@@ -10,11 +10,11 @@ jobs:
           java-version: 17
           distribution: temurin
       - run: ./gradlew clean check assemble
-      - run: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: reports
           path: build/reports
-      - run: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: app-war-file
           path: build/libs/ROOT.war
