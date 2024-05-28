@@ -1,0 +1,8 @@
+azure:
+  application-insights:
+    enabled: false
+management:
+  metrics:
+    export:
+      azuremonitor:
+        enabled: false

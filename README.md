@@ -40,6 +40,20 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
   - Logs (analytics) - query language for looking at "events" - pay attention to `traces` (logs), `requests` (HTTP), `performanceCounters` (metrics)
   - Metrics to investigate Micrometer-reported metrics, look under `azure.applicationinsights` namespace
 
+### Azure AD Authentication for Resource Server
+
+https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/spring-boot-starter-for-azure-active-directory-developer-guide?tabs=SpringCloudAzure5x
+
+TODO: How to set up the app registration
+
+TODO: How to request a token and which to use in Postman
+
+Set these environment variables from your Azure AD app registration:
+
+* `AZURE_AD_TENANTID`
+* `AZURE_AD_CLIENTID`
+* `AZURE_AD_CLIENTSECRET`
+
 ## Simulate Application Load
 
 Use [Taurus](https://gettaurus.org/) to execute the [`load-simulation.yml`](/load-simulation.yml) HTTP traffic test.
