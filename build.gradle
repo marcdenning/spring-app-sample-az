@@ -1,7 +1,7 @@
 plugins {
-    id 'org.springframework.boot' version '3.0.7'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'io.freefair.lombok' version '5.3.3.3'
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.5'
+    id 'io.freefair.lombok' version '8.6'
     id 'java'
     id 'checkstyle'
     id 'jacoco'
@@ -34,7 +34,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom "com.azure.spring:spring-cloud-azure-dependencies:5.2.0"
+        mavenBom "com.azure.spring:spring-cloud-azure-dependencies:5.12.0"
     }
 }
 
@@ -43,11 +43,11 @@ bootWar {
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.12"
 }
 
 checkstyle {
-    toolVersion = "10.2"
+    toolVersion = "10.16.0"
 }
 
 test {
@@ -57,8 +57,8 @@ test {
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
     reports {
-        xml.enabled true
-        csv.enabled true
-        html.enabled true
+        xml.required = true
+        csv.required = true
+        html.required = true
     }
 }
