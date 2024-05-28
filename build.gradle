@@ -10,7 +10,7 @@ plugins {
 
 group = 'com.marcdenning.azure'
 version = '0.3.0-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '21'
 
 configurations {
     compileOnly {
