@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/marcdenning/spring-app-sample/_apis/build/status/kenobi883.spring-app-sample-az?branchName=main)](https://dev.azure.com/marcdenning/spring-app-sample/_build/latest?definitionId=1&branchName=main)
+[![build-app](https://github.com/marcdenning/spring-app-sample-az/actions/workflows/build-app.yml/badge.svg)](https://github.com/marcdenning/spring-app-sample-az/actions/workflows/build-app.yml)
 
 # Spring Boot App on Azure Sample
 
@@ -27,7 +27,7 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
 
 * App Service for Windows
   - Tomcat 10
-  - Java 17
+  - Java 21
   - ```
     POST https://web-app-name.scm.azurewebsites.net/api/wardeploy
     Header: Authorization Basic-from-publish-profile
