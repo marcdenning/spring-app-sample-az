@@ -109,6 +109,7 @@ Managed Identities are provided by the Azure runtime, but developers are often c
 One way of allowing developers to authenticate from their local environment while still leveraging Managed Identities during deployment, is making use of the Azure Default Credential chain.
 In version 12+ of the Microsoft SQL Server JDBC driver, the driver can authenticate based on a chain of identities including an Azure CLI token.
 A developer can install the Azure CLI, authenticate to a tenant via `az login`, and the database driver can detect that authentication token as a fallback.
+If using Gitpod, use `az login --use-device-code` to authenticate as the interactive prompt may not work as well.
 
 Before configuring the application, the developer's Azure Active Directory account must be given permissions to use the database.
 Check [the Microsoft documentation on assigning roles](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/migrate-sql-database-to-passwordless-connection?tabs=spring%2Capp-service%2Cassign-role-azure-cli#assign-roles-to-the-managed-identity) for up-to-date steps.
@@ -135,6 +136,11 @@ spring:
 ```
 
 As long as the developer has a valid authentication token with the Azure CLI, they should be able to start the Spring Boot app and the Microsoft SQL Server driver will find that credential and authenticate to the database.
+Note that the `com.azure.identity` namespace is noisy in the logs, so setting the logging level to error may help in parsing application logs:
+
+```properties
+logging.level.com.azure.identity=error
+```
 
 Spring profiles or environment variables can be used to override the datasource URL once deployed and leverage the Managed Identity of the compute service.
 
