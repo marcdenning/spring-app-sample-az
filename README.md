@@ -40,6 +40,39 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
   - Logs (analytics) - query language for looking at "events" - pay attention to `traces` (logs), `requests` (HTTP), `performanceCounters` (metrics)
   - Metrics to investigate Micrometer-reported metrics, look under `azure.applicationinsights` namespace
 
+### Azure Storage
+
+Azure Storage is frequently used for its Blob storage operations to handle all types of files.
+Utilizing a Blob Storage Container is a much more performant and cost-efficient way of storing binary data or files than managing data in a database for instance.
+
+This branch of the Spring Boot sample app shows how to integrate with Azure Blob Storage.
+The following concepts are demonstrated:
+
+* Connecting to a Blob Storage Container
+* Uploading a file
+* Downloading a file
+
+To get started, create an Azure Storage account in your Azure subscription.
+You may follow the quickstart [_Upload, download, and list blobs with the Azure portal_](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) for more details about creating a Storage Account for storing blob data.
+When creating your Storage Account, allow public access for easy development of a PoC, but consider appropriate networking rules for a real use case.
+
+It is also recommended to use the Azure CLI to help authenticate to the Storage Account during development.
+The Azure CLI (`az` command) is included in the Gitpod workspace if you are using Gitpod.
+Otherwise, [install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) on your machine.
+
+Log in to your Azure account using `az login` (in Gitpod, it is best to use `az login --use-device-code`).
+This allows an Azure credential to be stored in your workspace, and the Spring Cloud Azure dependencies will automatically pick it up to authenticate to Azure services.
+
+In your `application.properties` file, include the following properties with the name of your storage account and the "Blob service" endpoint found in the Azure portal under Settings > Endpoints:
+
+```properties
+spring.cloud.azure.storage.blob.account-name=${AZURE_STORAGE_ACCOUNT_NAME}
+spring.cloud.azure.storage.blob.endpoint=${AZURE_STORAGE_ACCOUNT_ENDPOINT}
+```
+
+Update the values to your storage account or rely on the environment variables listed to populate these configuration properties.
+These properties are used by the Spring Cloud Azure library to create your `BlobServiceClient` automatically.
+
 ## Simulate Application Load
 
 Use [Taurus](https://gettaurus.org/) to execute the [`load-simulation.yml`](/load-simulation.yml) HTTP traffic test.
