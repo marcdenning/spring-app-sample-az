@@ -40,19 +40,30 @@ If you already have a Gitpod account, simply navigate to [https://gitpod.io#http
   - Logs (analytics) - query language for looking at "events" - pay attention to `traces` (logs), `requests` (HTTP), `performanceCounters` (metrics)
   - Metrics to investigate Micrometer-reported metrics, look under `azure.applicationinsights` namespace
 
-### Azure AD Authentication for Resource Server
+### Microsoft Entra Authentication for Resource Server
 
-https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/spring-boot-starter-for-azure-active-directory-developer-guide?tabs=SpringCloudAzure5x
+This feature utilizes the [Spring Boot Starter Guide from Microsoft](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/spring-boot-starter-for-entra-developer-guide?tabs=SpringCloudAzure5x) to set up the application.
+Specifically, see the section [Protect a resource server/API](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/spring-boot-starter-for-entra-developer-guide?tabs=SpringCloudAzure5x#protect-a-resource-serverapi) to require authentication and authorization on the API.
 
-TODO: How to set up the app registration
+First, you need an App Registration in Entra:
+
+1. Create a new app registration following the [Quickstart: Register an application in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+  Note the application ID.
+2. Then add a client secret using [Add and manage application credentials in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=client-secret).
+  Note the client secret as well.
+3. Now, ensure the registration exposes an API scope using [Configure an application to expose a web API](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-expose-web-apis).
+4. Configure the identified properties in the application following the notes below and start the API.
+  It should now require an `Authorization` header formatted as `Bearer $JWT` where you provide the bearer token value.
 
 TODO: How to request a token and which to use in Postman
 
-Set these environment variables from your Azure AD app registration:
+Set these environment variables from your Microsoft Entra app registration:
 
-* `AZURE_AD_TENANTID`
-* `AZURE_AD_CLIENTID`
-* `AZURE_AD_CLIENTSECRET`
+* `AZURE_AD_TENANTID` - GUID identifying your Microsoft Entra
+* `AZURE_AD_CLIENTID` - GUID identifying the client from the app registration
+* `AZURE_AD_CLIENTSECRET` - secret value assigned to the app registration to authenticate to Microsoft Entra
+* `AZURE_AD_APPURI` - the URI to use to compare the `aud` claim of the token to
+  * This may be just the client ID, or it may be prefixed with a protocol such as `api://`
 
 ## Simulate Application Load
 

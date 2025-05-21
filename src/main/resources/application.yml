@@ -11,4 +11,4 @@ spring:
         credential:
           client-id: ${AZURE_AD_CLIENTID}
           client-secret: ${AZURE_AD_CLIENTSECRET}
-        app-id-uri: ${AZURE_AD_CLIENTID}
+        app-id-uri: ${AZURE_AD_APPURI}
