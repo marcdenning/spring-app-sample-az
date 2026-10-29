@@ -45,7 +45,7 @@ bootWar {
 }
 
 jacoco {
-    toolVersion = "0.8.12"
+    toolVersion = "0.8.16"
 }
 
 checkstyle {
@@ -53,6 +53,7 @@ checkstyle {
 }
 
 test {
+    useJUnitPlatform()
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
